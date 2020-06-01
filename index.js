@@ -1,8 +1,16 @@
+/**
+ * Post code scrapper for local delivery projects
+ * This small script will go to codigo-postal.pt and get all postal codes in a district
+ *
+ * @version 1.0.0
+ * @author Filipe Mota de Sá {Pihh} - pihh.rocks@gmail.com
+ * @todo exclude unwanted regions
+ */
+
 // CHANGE ONLY THESE VARIABLES
 const place = "Setubal";
 
 // KEEP THIS CODE UNCHANGED
-
 // DEPENDENCIES
 const rp = require("request-promise");
 const $ = require("cheerio");
@@ -14,6 +22,7 @@ const { performance } = require("perf_hooks");
  *
  * @param  {Integer} index page index required to generate this url
  * @return {String}  complete url
+ * @since v1.0.0
  */
 const url = function(index) {
   return `https://www.codigo-postal.pt/${place.toLowerCase()}/${index}.html`;
@@ -25,6 +34,7 @@ const url = function(index) {
  * @param  {Integer} index page index
  * @param  {Integer} total total of pages
  * @return {String} Percentage of pages scraped
+ * @since v1.0.0
  */
 const percent = function(index, total) {
   return Math.round((index / total) * 100);
@@ -36,6 +46,7 @@ const percent = function(index, total) {
  * @param  {Integer} t0
  * @param  {Integer} t1
  * @return {String}
+ * @since v1.0.0
  */
 const executionTime = function(t0, t1) {
   return t1 - t0 + " milliseconds.";
@@ -43,8 +54,9 @@ const executionTime = function(t0, t1) {
 
 /**
  * main - the core function
- *
+ * Will scrape all the website´s pages, fetch all post codes and display the result in the console
  * @return {Void}  description
+ * @since v1.0.0
  */
 async function main() {
   try {
